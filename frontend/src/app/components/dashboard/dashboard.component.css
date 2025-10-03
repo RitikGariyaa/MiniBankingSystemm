@@ -1,0 +1,228 @@
+.page {
+    max-width: 1200px;
+    margin: 1.5rem auto;
+    padding: 0 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+}
+
+.page-title {
+    margin: .2rem 0 1rem;
+    font-size: 1.55rem;
+    letter-spacing: .5px;
+    font-weight: 600;
+}
+
+.actions-bar {
+    display: flex;
+    gap: .7rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+button.primary,
+button.ghost {
+    border: none;
+    padding: .55rem 1rem;
+    border-radius: 6px;
+    font-size: .75rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: .35px;
+    transition: background .2s, opacity .25s;
+}
+
+button.primary {
+    background: #FFC400;
+    color: #121212;
+}
+
+button.primary:hover {
+    background: #ffcf33;
+}
+
+button.ghost {
+    background: #2a2a2a;
+    color: #e1e1e1;
+}
+
+button.ghost:hover {
+    background: #343434;
+}
+
+.inline-error {
+    background: #371616;
+    color: #ffb1b1;
+    border: 1px solid #5b1d1d;
+    padding: .45rem .7rem;
+    border-radius: 6px;
+    font-size: .65rem;
+}
+
+.create-box {
+    background: #101010;
+    border: 1px solid #1e1e1e;
+    padding: 1.2rem 1.4rem;
+    border-radius: 12px;
+    margin-bottom: 1.3rem;
+    box-shadow: 0 5px 18px -7px rgba(0, 0, 0, .58);
+}
+
+.create-box h2 {
+    margin: 0 0 .9rem;
+    font-size: 1rem;
+    letter-spacing: .4px;
+    font-weight: 600;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    align-items: end;
+}
+
+.grid-4 label {
+    display: flex;
+    flex-direction: column;
+    font-size: .65rem;
+    font-weight: 600;
+    gap: .35rem;
+    letter-spacing: .35px;
+}
+
+.grid-4 input,
+.grid-4 select {
+    background: #1B1B1B;
+    border: 1px solid #2A2A2A;
+    color: #fff;
+    padding: .55rem .65rem;
+    border-radius: 6px;
+    font-size: .7rem;
+    outline: none;
+    transition: border .2s, background .2s;
+}
+
+.grid-4 input:focus,
+.grid-4 select:focus {
+    border-color: #FFC400;
+    background: #262626;
+}
+
+.full-line {
+    grid-column: 1 / -1;
+}
+
+.accounts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1rem;
+}
+
+.acc-card {
+    background: #0E0E0E;
+    border: 1px solid #1f1f1f;
+    padding: 1rem 1.05rem;
+    border-radius: 14px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+    transition: transform .15s, background .25s, border .25s;
+    box-shadow: 0 3px 14px -6px rgba(0, 0, 0, .6);
+    position: relative;
+}
+
+.acc-card:focus {
+    outline: 2px solid #FFC400;
+    outline-offset: 2px;
+}
+
+.acc-card:hover {
+    transform: translateY(-3px);
+    background: #141414;
+    border-color: #252525;
+}
+
+.acc-heading {
+    display: flex;
+    justify-content: space-between;
+    font-size: .6rem;
+    font-weight: 600;
+    letter-spacing: .5px;
+    color: #cfcfcf;
+}
+
+.acc-heading .status {
+    color: #58d58a;
+}
+
+.acc-heading .status.inactive {
+    color: #ff8c8c;
+}
+
+.acc-number {
+    font-size: .65rem;
+    color: #9d9d9d;
+}
+
+.balance {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #FFC400;
+    letter-spacing: .5px;
+}
+
+.empty {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: .75rem;
+    color: #c1c1c1;
+}
+
+.skeleton {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: .75rem;
+    letter-spacing: .3px;
+}
+
+.acc-actions {
+    margin-top: .5rem;
+    display: flex;
+    gap: .5rem;
+}
+
+button.small {
+    font-size: .7rem;
+    padding: .35rem .6rem;
+    border: 1px solid #555;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button.small.warn {
+    border-color: #b91c1c;
+    color: #b91c1c;
+    background: #fff;
+}
+
+button.small.warn:hover {
+    background: #b91c1c;
+    color: #fff;
+}
+
+@media (max-width: 650px) {
+    .actions-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .acc-card {
+        border-radius: 12px;
+    }
+}

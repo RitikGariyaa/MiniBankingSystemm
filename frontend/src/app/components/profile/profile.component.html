@@ -1,0 +1,49 @@
+<div class="profile-page">
+  <h1>Your Profile</h1>
+  <div class="msg success" *ngIf="message">{{ message }}</div>
+  <div class="msg error" *ngIf="error">{{ error }}</div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="profile-form">
+    <div class="grid-2">
+      <label>First Name
+        <input formControlName="firstName" type="text" />
+      </label>
+      <label>Last Name
+        <input formControlName="lastName" type="text" />
+      </label>
+      <label>Email
+        <input formControlName="email" type="email" />
+      </label>
+      <label>Phone
+        <input formControlName="phone" type="text" maxlength="10" />
+      </label>
+      <label>Date of Birth
+        <input formControlName="dob" type="date" />
+      </label>
+      <div></div>
+      <label>Address Line 1
+        <input formControlName="addressLine1" type="text" />
+      </label>
+      <label>Address Line 2
+        <input formControlName="addressLine2" type="text" />
+      </label>
+      <label>City
+        <input formControlName="city" type="text" />
+      </label>
+      <label>State
+        <input formControlName="state" type="text" />
+      </label>
+      <label>Postal Code
+        <input formControlName="postalCode" type="text" />
+      </label>
+      <label>Country
+        <input formControlName="country" type="text" />
+      </label>
+    </div>
+    <div class="actions">
+      <button class="primary" type="submit" [disabled]="saving">{{ saving? 'Saving...' : 'Save Changes' }}</button>
+      <button type="button" class="ghost" routerLink="/dashboard">Back</button>
+    </div>
+  </form>
+</div>
+

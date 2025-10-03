@@ -1,0 +1,94 @@
+<div class="page" *ngIf="!loading && account; else loadingTpl">
+  <div class="breadcrumb"><a routerLink="/dashboard">← Back</a></div>
+  <h1 class="page-title">Account #{{ account.accountNumber }} <small style="font-size:0.6em;color:#666">(ID: {{ account.id }})</small></h1>
+  <div class="tabs">
+    <button (click)="setTab('info')" [class.active]="tab==='info'">Info</button>
+    <button (click)="setTab('deposit')" [class.active]="tab==='deposit'">Deposit</button>
+    <button (click)="setTab('withdraw')" [class.active]="tab==='withdraw'">Withdraw</button>
+    <button (click)="setTab('transfer')" [class.active]="tab==='transfer'">Transfer</button>
+    <button (click)="setTab('txns')" [class.active]="tab==='txns'">Transactions</button>
+  </div>
+  <div class="inline-error" *ngIf="error">{{ error }}</div>
+
+  <section *ngIf="tab==='info'" class="panel">
+    <h2>Overview</h2>
+    <div class="info-grid">
+      <div><label>Internal ID</label><span>{{ account.id }}</span></div>
+      <div><label>Type</label><span>{{ account.accountType }}</span></div>
+      <div><label>Status</label><span>{{ account.status }}</span></div>
+      <div><label>Balance</label><span class="balance">{{ account.balance | number:'1.2-2' }}</span></div>
+      <div *ngIf="account.interestRate"><label>Interest</label><span>{{ account.interestRate }} %</span></div>
+      <div *ngIf="account.overdraftLimit"><label>Overdraft</label><span>{{ account.overdraftLimit }}</span></div>
+    </div>
+  </section>
+
+  <section *ngIf="tab==='deposit'" class="panel">
+    <h2>Deposit Funds</h2>
+    <form [formGroup]="moneyForm" (ngSubmit)="deposit()" class="money-form">
+      <label>Amount
+        <input type="number" step="0.01" formControlName="amount" />
+      </label>
+      <label>Note
+        <input formControlName="note" />
+      </label>
+      <button class="primary" type="submit">Deposit</button>
+    </form>
+  </section>
+
+  <section *ngIf="tab==='withdraw'" class="panel">
+    <h2>Withdraw Funds</h2>
+    <form [formGroup]="moneyForm" (ngSubmit)="withdraw()" class="money-form">
+      <label>Amount
+        <input type="number" step="0.01" formControlName="amount" />
+      </label>
+      <label>Note
+        <input formControlName="note" />
+      </label>
+      <button class="primary" type="submit">Withdraw</button>
+    </form>
+  </section>
+
+  <section *ngIf="tab==='transfer'" class="panel">
+    <h2>Transfer</h2>
+    <div *ngIf="!otherAccounts.length" class="empty" style="margin-bottom:1rem;">No other accounts available. Create another account first to transfer funds.</div>
+    <form [formGroup]="transferForm" (ngSubmit)="transfer()" class="transfer-form" *ngIf="otherAccounts.length">
+      <label>Destination Account
+        <select formControlName="toAccountId">
+          <option [ngValue]="null" disabled>Select account</option>
+          <option *ngFor="let o of otherAccounts" [ngValue]="o.id">
+            {{ o.id }} - #{{ o.accountNumber }} ({{ o.accountType }}) Bal: {{ o.balance | number:'1.2-2' }}
+          </option>
+        </select>
+      </label>
+      <label>Amount
+        <input type="number" step="0.01" formControlName="amount" />
+      </label>
+      <label>Note
+        <input formControlName="note" />
+      </label>
+      <button class="primary" type="submit" [disabled]="transferForm.invalid">Send</button>
+    </form>
+    <p style="font-size:0.75rem;color:#666;margin-top:1rem;">Note: Use internal account IDs above (not customer IDs). The list shows valid targets.</p>
+  </section>
+
+  <section *ngIf="tab==='txns'" class="panel">
+    <h2>Transactions</h2>
+    <div *ngIf="!transactions.length" class="empty">No transactions.</div>
+    <table *ngIf="transactions.length" class="txn-table">
+      <thead><tr><th>Date</th><th>Type</th><th>Amount</th><th>Note</th></tr></thead>
+      <tbody>
+        @for (t of transactions; track t.id) {
+          <tr>
+            <td>{{ t.txnDate | date:'short' }}</td>
+            <td>{{ t.txnType }}</td>
+            <td>{{ t.amount }}</td>
+            <td>{{ t.note }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+</div>
+<ng-template #loadingTpl>
+  <div class="page skeleton">Loading account...</div>
+</ng-template>

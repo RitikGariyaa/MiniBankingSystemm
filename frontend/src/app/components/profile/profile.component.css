@@ -1,0 +1,13 @@
+.profile-page { max-width: 860px; margin: 0 auto; padding: 1rem; }
+.profile-page h1 { margin-bottom: 1rem; }
+.profile-form .grid-2 { display: grid; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); gap: 1rem; }
+.profile-form label { display: flex; flex-direction: column; font-size: 0.85rem; gap: 0.25rem; }
+.profile-form input { padding: .45rem .5rem; border:1px solid #ccc; border-radius:4px; }
+.actions { margin-top: 1.5rem; display:flex; gap: .75rem; }
+button.primary { background:#2563eb; color:#fff; border:none; padding:.6rem 1rem; border-radius:4px; cursor:pointer; }
+button.primary:disabled { opacity:.6; cursor:default; }
+button.ghost { background:transparent; border:1px solid #777; padding:.55rem 1rem; border-radius:4px; }
+.msg { margin-bottom: .75rem; padding:.5rem .75rem; border-radius:4px; font-size:.85rem; }
+.msg.success { background:#e0f9ec; color:#066642; }
+.msg.error { background:#fde2e1; color:#7a1210; }
+

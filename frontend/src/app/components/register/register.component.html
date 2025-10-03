@@ -1,0 +1,43 @@
+<div class="auth-card">
+  <h2>Create Account</h2>
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="grid-2">
+      <label>First Name
+        <input formControlName="firstName" placeholder="John"/>
+      </label>
+      <label>Last Name
+        <input formControlName="lastName" placeholder="Doe"/>
+      </label>
+    </div>
+    <div class="err" *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid">First name required</div>
+
+    <label>Email
+      <input type="email" formControlName="email" placeholder="you@example.com"/>
+    </label>
+    <div class="err" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">Valid email required</div>
+
+    <label>Phone
+      <input formControlName="phone" placeholder="Optional"/>
+    </label>
+
+    <label>Date of Birth
+      <input type="date" formControlName="dob"/>
+    </label>
+
+    <div class="grid-2">
+      <label>Password
+        <input type="password" formControlName="password"/>
+      </label>
+      <label>Confirm Password
+        <input type="password" formControlName="confirmPassword"/>
+      </label>
+    </div>
+    <div class="err" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">Min 6 chars</div>
+
+    <button class="primary" [disabled]="loading">{{ loading ? 'Submitting...' : 'Register' }}</button>
+    <div class="minor-link">Have an account? <a routerLink="/login">Login</a></div>
+    <div class="error-banner" *ngIf="error">{{ error }}</div>
+    <div class="success-banner" *ngIf="success">Registration successful! Redirecting...</div>
+  </form>
+</div>
+

@@ -1,0 +1,53 @@
+<div class="page">
+  <h1 class="page-title">Your Accounts</h1>
+  <div class="actions-bar">
+    <button class="primary" (click)="toggleCreate()">{{ showCreate ? 'Cancel' : 'New Account' }}</button>
+    <button class="ghost" (click)="refresh()" [disabled]="loading">Refresh</button>
+  </div>
+  <div class="inline-error" *ngIf="error">{{ error }}</div>
+
+  <section *ngIf="showCreate" class="create-box">
+    <h2>Create Account</h2>
+    <form [formGroup]="createForm" (ngSubmit)="submitCreate()" class="grid-4" novalidate>
+      <label>Type
+        <select formControlName="accountType">
+          <option value="SAVINGS">SAVINGS</option>
+          <option value="CURRENT">CURRENT</option>
+        </select>
+      </label>
+      <label>Opening Balance
+        <input type="number" formControlName="openingBalance" min="0" step="0.01" />
+      </label>
+      <label *ngIf="createForm.value.accountType==='SAVINGS'">Interest %
+        <input type="number" formControlName="interestRate" step="0.01" />
+      </label>
+      <label *ngIf="createForm.value.accountType==='CURRENT'">Overdraft Limit
+        <input type="number" formControlName="overdraftLimit" step="0.01" />
+      </label>
+      <div class="full-line">
+        <button class="primary" type="submit">Create</button>
+      </div>
+    </form>
+  </section>
+
+  <div class="skeleton" *ngIf="loading">Loading...</div>
+
+  <div class="accounts-grid" *ngIf="!loading && accounts.length">
+    @for (acc of accounts; track acc.id) {
+      <div class="acc-card" tabindex="0">
+        <div class="acc-heading" (click)="open(acc)">
+          <span class="type">{{ acc.accountType }}</span>
+          <span class="status" [class.inactive]="acc.status!=='ACTIVE'">{{ acc.status }}</span>
+        </div>
+        <div class="acc-number" (click)="open(acc)"># {{ acc.accountNumber }}</div>
+        <div class="balance" (click)="open(acc)">{{ acc.balance | number:'1.2-2' }}</div>
+        <div class="acc-actions">
+          <button class="small" (click)="open(acc)">View</button>
+          <button class="small warn" *ngIf="acc.balance <= 0" title="Delete account (requires zero balance)" (click)="delete(acc)">Delete</button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div *ngIf="!loading && !accounts.length" class="empty">No accounts yet. Create one to get started.</div>
+</div>

@@ -1,0 +1,36 @@
+html,
+body,
+:host {
+    background: #080808;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.app-shell {
+    padding-top: 3.2rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0e0e0e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1e1e1e;
+    border-radius: 20px;
+    border: 2px solid #0e0e0e;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #272727;
+}

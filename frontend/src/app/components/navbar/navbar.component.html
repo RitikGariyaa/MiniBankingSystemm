@@ -1,0 +1,10 @@
+<nav class="nav-bar">
+  <div class="brand" (click)="toggle()">☰ MiniBank</div>
+  <ul [class.open]="mobileMenu">
+    <li *ngIf="auth.isLoggedIn()"><a routerLink="/dashboard" (click)="mobileMenu=false">Dashboard</a></li>
+    <li *ngIf="!auth.isLoggedIn()"><a routerLink="/login" (click)="mobileMenu=false">Login</a></li>
+    <li *ngIf="!auth.isLoggedIn()"><a routerLink="/register" (click)="mobileMenu=false">Register</a></li>
+    <li *ngIf="auth.isLoggedIn()" class="user"><a routerLink="/profile" (click)="mobileMenu=false">{{ (auth.customerChanges$|async)?.firstName }}</a></li>
+    <li *ngIf="auth.isLoggedIn()"><button (click)="logout()" class="logout">Logout</button></li>
+  </ul>
+</nav>
